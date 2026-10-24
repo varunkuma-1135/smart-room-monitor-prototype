@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Smart Room Monitor</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+<body>
+  <header>
+    <div>
+      <p class="eyebrow">INTERNET OF THINGS · PROTOTYPE</p>
+      <h1>Smart Room Monitor</h1>
+      <p class="subtitle">Monitor temperature and humidity across your rooms.</p>
+    </div>
+    <span class="live"><span></span> LIVE DEMO</span>
+  </header>
+
+  <main>
+    <section class="summary-grid">
+      <article class="summary-card"><span>Total readings</span><strong id="total">0</strong></article>
+      <article class="summary-card"><span>Average temperature</span><strong id="avgTemp">— °C</strong></article>
+      <article class="summary-card"><span>Average humidity</span><strong id="avgHumidity">— %</strong></article>
+      <article class="summary-card"><span>Alerts raised</span><strong id="alerts">0</strong></article>
+    </section>
+
+    <div class="section-heading">
+      <div><h2>Room conditions</h2><p>Values update automatically every 3 seconds.</p></div>
+      <button id="refreshBtn">Refresh now</button>
+    </div>
+    <section id="rooms" class="room-grid">
+      <div class="empty">Waiting for sensor readings. Run simulator.py to send sample data.</div>
+    </section>
+
+    <section class="panel">
+      <div class="section-heading">
+        <div><h2>Temperature history</h2><p>Latest sensor readings and the 35°C alert threshold.</p></div>
+      </div>
+      <div class="chart-wrap"><canvas id="temperatureChart"></canvas></div>
+    </section>
+
+    <section class="panel api-panel">
+      <h2>Prototype API endpoints</h2>
+      <p><code>POST /api/data</code> · Receive a sensor reading</p>
+      <p><code>GET /api/latest</code> · Latest reading per room</p>
+      <p><code>GET /api/history?limit=45</code> · Temperature history</p>
+      <p><code>GET /api/stats</code> · Summary statistics</p>
+    </section>
+    <p id="updated" class="updated">Dashboard not connected yet.</p>
+  </main>
+  <script src="{{ url_for('static', filename='dashboard.js') }}"></script>
+</body>
+</html>
